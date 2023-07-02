@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class Details extends StatelessWidget {
+  const Details({super.key});
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -92,8 +92,8 @@ class Details extends StatelessWidget {
                               fontSize: 21,
                             ),
                           ),
-                          SizedBox(
-                            height: 15.0,,
+                          const SizedBox(
+                            height: 15.0,
                           ),
                           const Row(
                             children: <Widget> [
@@ -121,7 +121,7 @@ class Details extends StatelessWidget {
                           ),
                           Container(
                             color: Colors.grey,
-                            height: 1.0,,
+                            height: 1.0,
                           ),
                           const SizedBox(
                             height: 35
@@ -166,7 +166,7 @@ class Details extends StatelessWidget {
                     child:  Transform.rotate(
                         angle: 3.14,
                       child: CustomPaint(
-                        child: MyBezieCurve(),
+                        child: const MyBezieCurve(),
                         painter: CurvePath(),
                       ),
                     )
@@ -176,7 +176,6 @@ class Details extends StatelessWidget {
           ),
         )
     );
-    throw UnimplementedError();
   }
 }
 
@@ -211,6 +210,8 @@ class CurvePath extends CustomPainter {
 }
 
 class MyBezieCurve extends StatelessWidget {
+  const MyBezieCurve({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ClipPath(
@@ -234,7 +235,7 @@ class MyBezieCurve extends StatelessWidget {
 class ClippingClass extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    var path = new Path();
+    var path = Path();
     path.lineTo(0, size.height * 0.50);
     path.quadraticBezierTo(size.width * 0.10, size.height * 0.80,
         size.width * 0.15, size.height * 0.60);
