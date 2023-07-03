@@ -1,125 +1,368 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker/details.dart';
+import 'package:intl/intl.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
-  // This widget is the root of your application.
+class MyApp extends StatelessWidget {
+  // This widget is the root of the application
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Habit Tracker',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+          primarySwatch: Colors.blue,
+        fontFamily: 'Raleway'
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Home(),
+      routes: {
+        '/details': (context) => const Details(),
+      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+List<Map<String, dynamic>> habits = [
+  {
+    'color': Colors.blue,
+    'title': 'YP',
+    'fulltext': 'Yoga Practices',
+  },
+  {
+    'color': Colors.red,
+    'title': 'GE',
+    'fulltext': 'Get Up Early',
+  },  {
+    'color': Colors.cyan,
+    'title': 'NS',
+    'fulltext': 'No Sugar',
+  },
+];
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
+List<Map<String, dynamic>> habits2 = [
+  {
+    'color': const Color(0xff7524ff),
+    'objective': 'Learn 5 new words',
+    'progress': '5 from 7 this week'
+  },
+  {
+    'color': const Color(0xfff03244),
+    'objective': 'Get Up Early',
+    'progress': '5 from 7 this week'
+  },  {
+    'color': const Color(0xff00d5e2),
+    'objective': 'Create an App a Day',
+    'progress': '6 from 7 this week'
+  },
+];
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
+class Home extends StatelessWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: Scaffold(
+          backgroundColor: const Color(0xff131b26),
+          body: Container(
+            padding: const EdgeInsets.only(top: 25.0, left: 25.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget> [
+                  Row(
+                    children: <Widget> [
+                      Expanded(
+                          child: RichText(
+                            softWrap: true,
+                            text: const TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Most Popular',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                  )
+                                ),
+                                TextSpan(
+                                  text: 'Habits',
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.white,
+                                  )
+                                )
+                              ]
+                            ),
+                          )
+                      ),
+                      Material(
+                        color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () {},
+                            child: Container(
+                              padding: const EdgeInsets.all(9.0),
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xff6f1bff),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0xff6f1bff),
+                                    offset: Offset(0, 3),
+                                    blurRadius: 5.0,
+                                  )
+                                ]
+                              ),
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                      ),
+                      const SizedBox(
+                        width: 25.0,
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 35.0,
+                  ),
+                  Container(
+                    height: 150,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                          itemCount: habits.length,
+                          itemBuilder: (ctx, id) {
+                          return Container(
+                            width: 150,
+                              margin:
+                            const EdgeInsets.only(right: 15.0, top: 9.0, bottom: 9.0),
+                            padding: const EdgeInsets.all(13.0),
+                            decoration: BoxDecoration(
+                              color: habits[id]['colors'],
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: habits[id]['color'],
+                                  blurRadius: 5.0,
+                                  offset: const Offset(0, 3),
+                                )
+                              ]
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget> [
+                                  Text(
+                                    habits[id]['title'],
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 27,
+                                      color: Colors.white
+                                    ),
+                                  ),
+                                  Text(
+                                    habits[id]['fulltext'],
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                        color: Colors.white
+                                    ),
+                                  ),
+                                ],
+                            ),
+                          );
+                          }
+                      ),
+                  ),
+                  const SizedBox(
+                    height: 35.0,
+                  ),
+                  Container(
+                    height: 90,
+                    decoration: const BoxDecoration(
+                      color: Color(0xff1b232e),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        bottomLeft: Radius.circular(15),
+                      )
+                    ),
+                    padding: const EdgeInsets.all(15),
+                    child: ListView.builder(
+                      itemCount: 7,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (ctx, f) {
+                        int day = DateTime.now().day + f;
+                        return FittedBox(
+                          child: Container(
+                            width: 90,
+                              height: 90,
+                              margin: const EdgeInsets.only(right: 15.0),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: day == DateTime.now().day
+                                  ? const Color(0xff727be8)
+                                  : const Color(0xff131b26),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget> [
+                                Text(
+                                  '${DateTime.now().day + f}',
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: day == DateTime.now().day
+                                      ? FontWeight.bold
+                                        : FontWeight.normal,
+                                    color: day == DateTime.now().day
+                                      ? Colors.white
+                                        : Colors.grey[500],
+                                  ),
+                                ),
+                                Text(
+                                  DateFormat('EE').format(
+                                    DateTime.now().add(
+                                      Duration(days: f),
+                                    ),
+                                  ),
+                                  style: TextStyle(
+                                    color: day == DateTime.now().day
+                                        ? Colors.white
+                                    : Colors.grey[700],
+                                    fontWeight: day == DateTime.now().day
+                                      ? FontWeight.bold
+                                        : FontWeight.normal
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                        }
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 35.0,
+                  ),
+                  RichText(
+                      text: TextSpan(
+                        children: [
+                          const TextSpan(
+                          text: 'Your Habits',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 21
+                            )
+                          ),
+                          TextSpan(
+                            text: " 5",
+                            style: TextStyle(
+                              color: Colors.grey[500],
+                              fontSize: 21
+                            )
+                          )
+                        ]
+                      )
+                  ),
+                  // ListItem(id: 1,)
+                  Expanded(
+                      child: ListView.builder(
+                        itemCount: habits2.length,
+                          itemBuilder: (ctx, id) {
+                          return ListItem(id: id);
+
+                          }
+                      )
+                  )
+                ],
+            ),
+          ),
+        )
+    );
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class ListItem extends StatelessWidget {
+  final int id;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  const ListItem({key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, '/details');
+      },
+      child: Container(
+// height 150
+        margin: const EdgeInsets.symmetric(vertical: 21.0),
+        padding: const EdgeInsets.only(right: 25.0),
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Row(
+              children: <Widget>[
+                Container(
+                  padding: const EdgeInsets.all(5.0),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: id == 0 ? habits2[id]['color'] : Colors
+                          .transparent,
+                      border: id == 0
+                          ? const Border()
+                          : Border.all(
+                        color: Colors.grey,
+                      )
+                  ),
+                  child: Icon(
+                    Icons.check,
+                    color: id == 0 ? Colors.white : Colors.grey[500]
+                  ),
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget> [
+                    Text(
+                      habits2[id]['objective'],
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 19
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    Text(
+                      habits2[id]['progress'],
+                      style: TextStyle(
+                        color: Colors.grey[500],
+                        fontSize: 17
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    )
+                  ],
+                )
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            LinearProgressIndicator(
+              value: .71,
+              backgroundColor: const Color(0xff1c232d),
+              valueColor: AlwaysStoppedAnimation(
+                habits2[id]['color']
+              ),
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
