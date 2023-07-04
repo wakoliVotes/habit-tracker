@@ -3,8 +3,8 @@
 A UI implementation for Habit Tracker made with Flutter.
 
 ## UI Screenshots
-<img width="250" height="520" src="lib/screenshots/habittracker1.png" >
-<img width="250" height="520" src="lib/screenshots/habittracker2.png" >
+<img width="250" height="500" src="lib/screenshots/habittracker1.png" >
+<img width="250" height="500" src="lib/screenshots/habittracker2.png" >
 
 
 ## Getting Started
