@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Details extends StatelessWidget {
-  const Details({super.key});
+  const Details({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -166,8 +166,8 @@ class Details extends StatelessWidget {
                     child:  Transform.rotate(
                         angle: 3.14,
                       child: CustomPaint(
-                        child: const MyBezieCurve(),
                         painter: CurvePath(),
+                        child: const MyBezieCurve(),
                       ),
                     )
                 )
@@ -210,7 +210,7 @@ class CurvePath extends CustomPainter {
 }
 
 class MyBezieCurve extends StatelessWidget {
-  const MyBezieCurve({super.key});
+  const MyBezieCurve({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
