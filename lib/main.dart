@@ -3,11 +3,13 @@ import 'package:habit_tracker/details.dart';
 import 'package:intl/intl.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of the application
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         fontFamily: 'Raleway'
       ),
-      home: Home(),
+      home: const Home(),
       routes: {
         '/details': (context) => const Details(),
       },
@@ -131,7 +133,7 @@ class Home extends StatelessWidget {
                   const SizedBox(
                     height: 35.0,
                   ),
-                  Container(
+                  SizedBox(
                     height: 150,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
