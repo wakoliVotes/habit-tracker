@@ -1,12 +1,15 @@
-# habit_tracker
+# Habit Tracker
 
-A new Flutter project.
+A UI implementation for Habit Tracker made with Flutter.
+
+## UI Screenshots
+<img width="250" height="520" src="lib/screenshots/habittracker1.png" >
+<img width="250" height="520" src="lib/screenshots/habittracker2.png" >
+
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
+Loving Flutter?, here are few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)

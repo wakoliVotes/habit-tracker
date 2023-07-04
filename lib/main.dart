@@ -89,7 +89,7 @@ class Home extends StatelessWidget {
                                   )
                                 ),
                                 TextSpan(
-                                  text: 'Habits',
+                                  text: ' Habits',
                                   style: TextStyle(
                                     fontSize: 25,
                                     color: Colors.white,
@@ -257,6 +257,7 @@ class Home extends StatelessWidget {
                           text: 'Your Habits',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
+                              color: Colors.white,
                               fontSize: 21
                             )
                           ),
